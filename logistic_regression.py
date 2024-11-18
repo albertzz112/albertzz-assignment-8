@@ -22,7 +22,7 @@ def generate_ellipsoid_clusters(distance, n_samples=100, cluster_std=0.5):
     X2 = np.random.multivariate_normal(mean=[1, 1], cov=covariance_matrix, size=n_samples)
     
     # Implement: Shift the second cluster along the x-axis and y-axis for a given distance
-    X2 += [distance, distance]
+    X2 += [distance, -distance]
     y2 = np.ones(n_samples)
 
     # Combine the clusters into one dataset
@@ -141,11 +141,10 @@ def do_experiments(start, end, step_num):
 
     # Implement: Plot beta1 / beta2 (Slope)
     plt.subplot(3, 3, 4)
-    plt.plot(shift_distances, beta2_list, marker='o')
+    plt.plot(shift_distances, slope_list, marker='o')
     plt.title("Shift Distance vs Beta1 / Beta2 (Slope)")
     plt.xlabel("Shift Distance")
     plt.ylabel("Beta1 / Beta2")
-    plt.ylim(-2, 0)
 
     # Implement: Plot beta0 / beta2 (Intercept ratio)
     plt.subplot(3, 3, 5)
@@ -156,14 +155,14 @@ def do_experiments(start, end, step_num):
 
     # Plot logistic loss
     plt.subplot(3, 3, 6)
-    plt.plot(shift_distances, margin_widths, marker='o')
+    plt.plot(shift_distances, loss_list, marker='o')
     plt.title("Shift Distance vs Logistic Loss")
     plt.xlabel("Shift Distance")
     plt.ylabel("Logistic Loss")
 
     # Implement: Plot margin width
     plt.subplot(3, 3, 7)
-    plt.plot(shift_distances, intercept_list, marker='o')
+    plt.plot(shift_distances, margin_widths, marker='o')
     plt.title("Shift Distance vs Margin Width")
     plt.xlabel("Shift Distance")
     plt.ylabel("Margin Width")
